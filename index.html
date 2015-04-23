@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="RSSFeedApp">
 <head>
-	<title>NEWS - READER</title>
+	<title>FEED GOSSIP</title>
 	
 	<link rel="stylesheet" type="text/css" href="assets/css/materialize.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/stylesheet.css">
@@ -9,15 +9,15 @@
 </head>
 <body ng-controller="FeedCtrl">
 
-	<header class="card-panel teal lighten-2">
-		<h4><i class="mdi-action-description left"></i><span class="black-text text-darken-2">NEWS </span><span class="green-text text-darken-2" >READER</span></h4>
+	<header class="card-panel grey lighten-2">
+		<h1><img height="80px" src="http://icons.iconarchive.com/icons/artdesigner/tweet-my-web/256/gossip-birds-icon.png"><span class="black-text text-darken-2">FEED </span><span class="green-text text-darken-2" >GOSSIP</span></h1>
 	</header>
 	<div class="row" id="mainDiv">
     <div class="col s3">
       <form class="col s12">
      <!--    <input type="text" placeholder="Enter URL to view feeds"  class="black-text text-darken-2"> -->
         <input type="text" id ="searchbox" placeholder = "Enter URL to view feed" ng-model="site"/>
-        <input ng-click="loadFeed($event)" type="submit" value="Read" id="submitButton" class="btn">
+        <input ng-click="loadFeed($event)" type="submit" value="Read" id="submitButton" class="btn RoyalBlue">
       	<ul class="collapsible" data-collapsible="accordion">
   			<li>
     				<div class="collapsible-header">All</div>
@@ -86,7 +86,10 @@
         </div>
       </div>
       <div ng-repeat = "feed in feeds | filter:find" class="col s12">
-    		<div class="collection"><a href="{{feed.link}}" target="_blank">{{feed.title}}</a><span>     </span><a href='' onclick="Materialize.toast('Saved!', 500)"><i ng-click = "arr(feed)" class= "mdi-action-bookmark"></i></a></div>
+    		<div class="collection"><a href="{{feed.link}}" target="_blank">{{feed.title}}</a><span>     </span><a href='' onclick="Materialize.toast('Saved!', 500)"><i ng-click = "arr(feed)" class= "mdi-action-bookmark"></i></a>
+        <span>     </span><a href=''><i class= "mdi-social-share"></i></a>
+
+        </div>
     		<p>{{feed.contentSnippet}}</p>
     		<p class="grey-text text-darken-2">{{feed.publishedDate}}</p>
     	</div>
