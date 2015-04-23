@@ -1,0 +1,85 @@
+
+<h3 ng-show="client.isConnected()" class="connected">Connected as {{username}} </h3>
+
+<div ng-show="!client.isConnected()">
+  <h3>Enter your Username to get started!</h3>
+  <div class="row">
+    <div class="input-field col s4">
+      <input placeholder="My Username" id="userinput" ng-model="username" type="text" autofocus />
+    </div>
+  </div>
+  <div class="row">
+    <div class ="col s3 offset-s2">
+      <input type="button" id="butn" class="btn" value="Connect" ng-click="connect()">
+    </div>
+  </div>
+</div>
+
+<div ng-show="client.isConnected()">
+  <div class="row">
+    <div class="col s12 m7">
+      <div class="card">
+        <div class="card-content">
+          <div class="row">
+            <div class="input-field col s4">
+              <input placeholder="User to call" ng-model="friendId" type="text" autofocus ng-show="!activeCall" />
+            </div>
+          </div>
+            <div class="col s4"><img class="responsive-img"src="assets/images/videoicon.jpg"></div>
+            <button ng-click="call()" ng-show="!activeCall" class="btn">Call</button>
+            <button ng-click="hangup()" ng-show="activeCall" class="btn">Hang up</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Display Video-->
+<div class="row" ng-show='activeCall'>
+  <div class="col s3 offset-s4">
+    <div id="remoteVideoSource"></div>
+    <div id="localVideoSource"></div>
+  </div>
+</div>
+
+<!-- text part-->
+
+<div ng-show="client.isConnected()">
+  <div class="row">
+    <div class="col s12 m7">
+      <div class="card">
+        <div class="card-content">
+          <h3>Click on the <span class="red-text">START TEXT</span> button to start</h3>
+          <button class="btn" ng-click="doLogin()">Start Text</button>
+          <div id="messaging">
+          <ul id="messages">
+            <li><span class="blue-text">View Messages here</span></li>
+            <li ng-repeat='msg in myMessage'>
+            {{username}} : {{msg.message}}
+            </li>
+            <li ng-repeat='message in messageArray'>
+            {{remote}} : {{message.message}}
+            </li>
+          </ul><br/>
+          <h3>Send To:</h3>
+          <div class="row">
+            <div class="input-field col s4">
+              <input placeholder="Username to chat with" id="remoteId" type="text" ng-model='remote'/><br />
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <textarea id="textarea1" class="materialize-textarea" ng-model='messageText'></textarea>
+              <label for="textarea1">Enter Text Here</label>
+            </div>
+          </div>
+
+          <input class="btn" id='sendMessage' type='button' value='Send Message' ng-click='sendMessage()' />
+          </div>
+        </div>
+      </div>
+      </div>
+  </div>
+</div>
+
+
