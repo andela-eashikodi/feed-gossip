@@ -1,7 +1,5 @@
 'use strict';
 
-var App = angular.module('RSSFeedApp', []);
-
 App.controller("FeedCtrl", ['$scope','FeedService', function ($scope,Feed) {  
   $scope.site = '';
   $scope.currentUrl='';

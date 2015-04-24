@@ -1,3 +1,4 @@
+'use strict'
   //set the video elements
 function setVideo(elementId, videoElement) {
   var videoParent = document.getElementById(elementId);
@@ -5,7 +6,7 @@ function setVideo(elementId, videoElement) {
   videoParent.appendChild(videoElement);
 }
 
-
+ 
 App.controller('VtCtrl', ['$scope', function($scope) {
 
   $scope.username = "";

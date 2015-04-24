@@ -1,115 +1,23 @@
 <!DOCTYPE html>
-<html ng-app="RSSFeedApp">
+<html ng-app="myApp">
 <head>
 	<title>FEED GOSSIP</title>
-	
-	<link rel="stylesheet" type="text/css" href="assets/css/materialize.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/stylesheet.css">
-  <script type="text/javascript" src="js/angular.min.js"></script>
+  <link type="text/css" rel="stylesheet" href="assets/css/materialize.css"  media="screen,projection"/>
+  <link rel="stylesheet" type="text/css" href="assets/css/text.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <script src="https://cdn.respoke.io/respoke.min.js"></script>
+  
 </head>
-<body ng-controller="FeedCtrl">
-
-	<header class="card-panel grey lighten-2">
-		<h1><img height="80px" src="http://icons.iconarchive.com/icons/artdesigner/tweet-my-web/256/gossip-birds-icon.png"><span class="black-text text-darken-2">FEED </span><span class="green-text text-darken-2" >GOSSIP</span></h1>
-	</header>
-	<div class="row" id="mainDiv">
-    <div class="col s3">
-      <form class="col s12">
-     <!--    <input type="text" placeholder="Enter URL to view feeds"  class="black-text text-darken-2"> -->
-        <input type="text" id ="searchbox" placeholder = "Enter URL to view feed" ng-model="site"/>
-        <input ng-click="loadFeed($event)" type="submit" value="Read" id="submitButton" class="btn RoyalBlue">
-      	<ul class="collapsible" data-collapsible="accordion">
-  			<li>
-    				<div class="collapsible-header">All</div>
-    				<div class="collapsible-body">
-              <div class = "collection">
-              <div class="collection-item"><b>List Of All Saved site</b></div>
-                <div class="collection-item"><input ng-model="infeed" name =  "addval" type="text" class="col s6 right" /><button class="btn" value="add" ng-click="news(infeed)">add</button></div>
-                <div class="collection-item" id="alldiv">
-                  <div class="collection-item" ng-click="removeall()"><a href=''>Clear List</a></div>
-                </div>
-                <div class="collection-item" ng-repeat="item in allfeed" >
-                  <div><a href="{{item.link}}" target ='_blank'>{{item.name}}</a></div>
-                </div>
-              </div>
-            </div>
-  			</li>
-  			<li>
-    			<div class="collapsible-header">Saved</div>
-    			<div class="collapsible-body">
-            <div class="collection">
-            <div class="collection-item"><b>List Of Saved Feeds</b></div>
-            <div class="collection-item" ng-click="removesave()"><a href = ''>Clear List</a></div>
-            <div class="collection-item" ng-repeat = "item in saved">
-              <div><a href="{{item.link}}" target ='_blank'>{{item.title}}</a></div>
-            </div>
-            </div>
-          </div>
-        </li>
-  			<li>
-    			<div class="collapsible-header active">Category</div>
-    			<div class="collapsible-body">
-    			<div class="collection">
-    				<div class="collection-item"><b>NEWS</b></div>
-            <div class="collection-item" ng-click="site='http://vanguardngr.com/feed';loadFeed($event)"><a href="#">VanguardNG</a></div>
-    				<div class="collection-item" ng-click="site='http://rss.cnn.com/rss/cnn_topstories.rss';loadFeed($event)"><a href="#">CNN</a></div>
-            <div class="collection-item"><b>TECHNOLOGY</b></div>
-            <div class="collection-item" ng-click="site='http://wired.com/feed';loadFeed($event)"><a href="#">Wired</a></div>
-            <div class="collection-item"><b>SPORT</b></div>
-            <div class="collection-item" ng-click="site='http://www.goal.com/en/feeds/news';loadFeed($event)"><a href="#">Goal.com</a></div>
-    				<div class="collection-item"><b>GOSSIP</b></div>
-            <div class="collection-item" ng-click="site='http://nairaland.com';loadFeed($event)"><a href="#">NairaLand</a></div>
-    				<div class="collection-item" ng-click="site='http://www.gistus.com/feed';loadFeed($event)"><a href="#">LindaIkeji</a></div>
-    			</div>
-    			</div>
-    		</li>
-  		</ul>
-      </form>
-    </div>
-    <div class="col s9">
-      <div class="card-panel teal"><span id="headline" class="white-text text-darken-2">Today's Headlines....{{currentUrl}}</span></div>
-      <div class="progress" ng-show="loading">
-        <div class="indeterminate"></div>
-      </div>
-      <div class="card-panel white" ng-show="err"><span class="black-text text-darken-2"> Could not locate feed</span></div>
-      <div class="col s3"><input class="browser-default" type="search"  placeholder="Search" ng-show ="feeds.length > 0" ng-model ="find" /></div>
-      <div ng-hide="pageload" class="row">
-        <div class="col s12 m9">
-          <div class="card">
-            <div class="card-image">
-              <img src="http://www.andela.co/modules/core/img/assets/home/background-light.jpg">
-            </div>
-            <div class="card-action">
-              <a href='http://apply.andela.co' target="_blank">apply@andela</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div ng-repeat = "feed in feeds | filter:find" class="col s12">
-    		<div class="collection"><a href="{{feed.link}}" target="_blank">{{feed.title}}</a><span>     </span><a href='' onclick="Materialize.toast('Saved!', 500)"><i ng-click = "arr(feed)" class= "mdi-action-bookmark"></i></a>
-        <span>     </span><a href=''><i class= "mdi-social-share"></i></a>
-
-        </div>
-    		<p>{{feed.contentSnippet}}</p>
-    		<p class="grey-text text-darken-2">{{feed.publishedDate}}</p>
-    	</div>
-    </div>
-  </div>
-  <div class="row">
-  <footer class="page-footer teal">
-  <div class="footer">
-    <div class="footer-copyright">
-        <div class="container">
-          © 2015 Copyright Text
-        <a class="grey-text text-lighten-4 right" href="https://github.com/andela-eashikodi?tab=repositories" target="_blank">Ashikodi</a>
-        </div>
-    </div>
-  </div>
-  </footer>
-  </div>    
-    
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/materialize.min.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
+<body>
+  <div ng-view></div>
+  <script type="text/javascript" src="assets/js/jquery.js"></script>
+  <script type="text/javascript" src="assets/js/materialize.min.js"></script>
+  <script type="text/javascript" src="libs/angular/angular.js"></script>
+  <script src="libs/angular-route/angular-route.js"></script>
+  <script src="libs/angular-resource/angular-resource.js"></script>
+  <script type="text/javascript" src="app/module/app.module.js"></script>
+  <script type="text/javascript" src="app/controller/feed.controller.js"></script>
+  <script type="text/javascript" src="app/controller/home.controller.js"></script>
+  <script type="text/javascript" src="app/controller/video.controller.js"></script>
 </body>
 </html>
