@@ -15,6 +15,7 @@ App.controller('VtCtrl', ['$scope', 'msgService',  function($scope, msgService) 
   $scope.messageArray = [];
   // $scope.myMessage = [];
   $scope.messageText = msgService.getText().txt;
+  $scope.messagelnk = msgService.getText().lnk;
 
   var callOptions = {
     onLocalMedia: function(evt) {

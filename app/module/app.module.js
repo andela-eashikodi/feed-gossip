@@ -36,7 +36,7 @@ App.service('msgService', function() {
   var msgLink; 
 
   var addText = function(feed){
-    msgText = feed.title;
+    msgText = "'"+feed.title+"'";
     msgLink = feed.link;
   };
 
