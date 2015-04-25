@@ -77,7 +77,7 @@
       </div>
       <div ng-repeat = "feed in feeds | filter:find" class="col s12">
         <div class="collection"><a href="{{feed.link}}" target="_blank">{{feed.title}}</a><span>     </span><a href='' onclick="Materialize.toast('Saved!', 500)"><i ng-click = "arr(feed)" class= "mdi-action-bookmark"></i></a>
-        <span>     </span><a href='#/videoandtext'><i class= "mdi-social-share"></i></a>
+        <span>     </span><a href='#/videoandtext'><i ng-click = "msg(feed)" class= "mdi-social-share"></i></a>
 
         </div>
         <p>{{feed.contentSnippet}}</p>

@@ -1,6 +1,6 @@
 'use strict';
 
-App.controller("FeedCtrl", ['$scope','FeedService', function ($scope,Feed) {  
+App.controller("FeedCtrl", ['$scope','FeedService', function ($scope,Feed,msgService) {  
   $scope.site = '';
   $scope.currentUrl='';
   (localStorage.getItem('savedpost')) ? $scope.saved = angular.fromJson(localStorage.getItem('savedpost')) : $scope.saved = [];
@@ -42,7 +42,6 @@ App.controller("FeedCtrl", ['$scope','FeedService', function ($scope,Feed) {
     }
     $scope.saved.unshift({title:feed.title, link: feed.link});
     localStorage.setItem('savedpost', angular.toJson($scope.saved));
-
   };
 
   $scope.news = function(itemadd){
@@ -66,12 +65,8 @@ App.controller("FeedCtrl", ['$scope','FeedService', function ($scope,Feed) {
     $scope.saved = [];
   };
 
-}]);
+  $scope.msg = function(feed){
+        msgService.addText(feed);
+    };
 
-App.factory('FeedService',['$http',function($http){
-  return {
-    parseFeed : function(url){
-      return $http.jsonp('//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url));
-    }
-  };
 }]);

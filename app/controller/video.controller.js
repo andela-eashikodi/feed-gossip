@@ -7,13 +7,14 @@ function setVideo(elementId, videoElement) {
 }
 
  
-App.controller('VtCtrl', ['$scope', function($scope) {
+App.controller('VtCtrl', ['$scope', function($scope, msgService) {
 
   $scope.username = "";
   $scope.friendId = "";
   $scope.activeCall = null;
   $scope.messageArray = [];
   $scope.myMessage = [];
+  $scope.messageText = msgService.getText();
 
   var callOptions = {
     onLocalMedia: function(evt) {
