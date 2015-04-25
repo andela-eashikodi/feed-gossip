@@ -1,11 +1,10 @@
 'use strict';
 
-App.controller("FeedCtrl", ['$scope','FeedService', function ($scope,Feed,msgService) {  
+App.controller("FeedCtrl", ['$scope','FeedService', 'msgService', function ($scope,Feed,msgService) {  
   $scope.site = '';
   $scope.currentUrl='';
   (localStorage.getItem('savedpost')) ? $scope.saved = angular.fromJson(localStorage.getItem('savedpost')) : $scope.saved = [];
   (localStorage.getItem('allsite')) ? $scope.allfeed = angular.fromJson(localStorage.getItem('allsite')) : $scope.allfeed = [];
-  // $scope.allfeed = [];
 
   $scope.loadFeed=function(e){
     $scope.currentUrl = $scope.site;
@@ -67,6 +66,6 @@ App.controller("FeedCtrl", ['$scope','FeedService', function ($scope,Feed,msgSer
 
   $scope.msg = function(feed){
         msgService.addText(feed);
-    };
+  };
 
 }]);

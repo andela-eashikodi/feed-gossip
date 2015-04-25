@@ -1,15 +1,5 @@
 'use strict';
 
-App.service('msgService', function() {
-  var msgText; 
-
-  var addText = function(feed){
-    msgText = feed.title;
-  };
-
-  var getText = function(){
-    return msgText;
-  };
 
   // return {
   //   addText: addText,
@@ -28,5 +18,3 @@ App.service('msgService', function() {
   //   addProduct: addProduct,
   //   getProducts: getProducts
   // };
-
-});

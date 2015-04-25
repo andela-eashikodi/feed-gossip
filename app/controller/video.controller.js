@@ -7,14 +7,14 @@ function setVideo(elementId, videoElement) {
 }
 
  
-App.controller('VtCtrl', ['$scope', function($scope, msgService) {
+App.controller('VtCtrl', ['$scope', 'msgService',  function($scope, msgService) {
 
   $scope.username = "";
   $scope.friendId = "";
   $scope.activeCall = null;
   $scope.messageArray = [];
-  $scope.myMessage = [];
-  $scope.messageText = msgService.getText();
+  // $scope.myMessage = [];
+  $scope.messageText = msgService.getText().txt;
 
   var callOptions = {
     onLocalMedia: function(evt) {
@@ -84,7 +84,7 @@ App.controller('VtCtrl', ['$scope', function($scope, msgService) {
     $scope.$apply(function() {
       $scope.message = evt.message.message;
       $scope.messageArray.push({
-        remote: $scope.remote,
+        name: $scope.remote,
         message: $scope.message
       });
     });
@@ -99,9 +99,9 @@ App.controller('VtCtrl', ['$scope', function($scope, msgService) {
 
 
   $scope.sendMessage = function() {
-    $scope.myMessage.push({message: $scope.messageText});
 
     var endpoint = $scope.callClient.getEndpoint({id: $scope.remote});
+    $scope.messageArray.push({name: $scope.username, message: $scope.messageText});
 
     endpoint.sendMessage({message: $scope.messageText});
     $scope.messageText = "";

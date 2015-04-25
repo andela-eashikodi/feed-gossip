@@ -31,6 +31,25 @@ App.directive('mAccord', function(){
   };
 });
 
+App.service('msgService', function() {
+  var msgText;
+  var msgLink; 
+
+  var addText = function(feed){
+    msgText = feed.title;
+    msgLink = feed.link;
+  };
+
+  var getText = function(){
+    return {txt:msgText, lnk:msgLink};
+  };
+
+  return {
+    addText: addText,
+    getText: getText
+  };
+});
+
 var homeCtrl = App.controller("homeCtrl", function($scope){	
 });
  
