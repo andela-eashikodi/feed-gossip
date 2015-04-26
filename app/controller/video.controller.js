@@ -15,7 +15,6 @@ App.controller('VtCtrl', ['$scope', 'msgService',  function($scope, msgService) 
   $scope.messageArray = [];
   // $scope.myMessage = [];
   $scope.messageText = msgService.getText().txt;
-  $scope.messagelnk = msgService.getText().lnk;
 
   var callOptions = {
     onLocalMedia: function(evt) {
@@ -86,7 +85,8 @@ App.controller('VtCtrl', ['$scope', 'msgService',  function($scope, msgService) 
       $scope.message = evt.message.message;
       $scope.messageArray.push({
         name: $scope.remote,
-        message: $scope.message
+        message: $scope.message,
+        fdlnk: msgService.getText().lnk
       });
     });
   });
@@ -102,7 +102,7 @@ App.controller('VtCtrl', ['$scope', 'msgService',  function($scope, msgService) 
   $scope.sendMessage = function() {
 
     var endpoint = $scope.callClient.getEndpoint({id: $scope.remote});
-    $scope.messageArray.push({name: $scope.username, message: $scope.messageText});
+    $scope.messageArray.push({name: $scope.username, message: $scope.messageText, fdlnk: msgService.getText().lnk});
 
     endpoint.sendMessage({message: $scope.messageText});
     $scope.messageText = "";
